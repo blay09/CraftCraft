@@ -4,13 +4,9 @@ Minecraft Mod. Adds an inventory crafting table and a normal portable one.
 
 - [Modpack Permissions](https://mods.twelveiterations.com/permissions)
 
-#### Forge
+#### Downloads
 
 [![Versions](http://cf.way2muchnoise.eu/versions/237581_latest.svg)](https://www.curseforge.com/minecraft/mc-mods/crafting-slots) [![Downloads](http://cf.way2muchnoise.eu/full_237581_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/crafting-slots)
-
-#### Fabric
-
-[![Versions](http://cf.way2muchnoise.eu/versions/502646_latest.svg)](https://www.curseforge.com/minecraft/mc-mods/crafting-slots-fabric) [![Downloads](http://cf.way2muchnoise.eu/full_502646_downloads.svg)](https://www.curseforge.com/minecraft/mc-mods/crafting-slots-fabric)
 
 ## Contributing
 
