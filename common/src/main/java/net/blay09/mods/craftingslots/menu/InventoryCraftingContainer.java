@@ -1,15 +1,12 @@
-package net.blay09.mods.craftingslots.container;
+package net.blay09.mods.craftingslots.menu;
 
 import net.minecraft.core.NonNullList;
 import net.minecraft.world.entity.player.Inventory;
-import net.minecraft.world.entity.player.StackedContents;
 import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.inventory.TransientCraftingContainer;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.crafting.CraftingInput;
 
-import java.util.Iterator;
 import java.util.List;
 
 public class InventoryCraftingContainer extends TransientCraftingContainer {

@@ -1,19 +1,26 @@
 package net.blay09.mods.craftingslots.client.screen;
 
-import net.blay09.mods.craftingslots.container.PortableCraftingMenu;
+import net.blay09.mods.craftingslots.menu.PortableCraftingMenu;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.gui.navigation.ScreenPosition;
+import net.minecraft.client.gui.screens.inventory.AbstractRecipeBookScreen;
+import net.minecraft.client.gui.screens.recipebook.CraftingRecipeBookComponent;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Inventory;
 
-public class PortableCraftingScreen extends AbstractContainerScreen<PortableCraftingMenu> {
+public class PortableCraftingScreen extends AbstractRecipeBookScreen<PortableCraftingMenu> {
 
     private static final ResourceLocation texture = ResourceLocation.withDefaultNamespace("textures/gui/container/crafting_table.png");
 
-    public PortableCraftingScreen(PortableCraftingMenu container, Inventory playerInventory, Component displayName) {
-        super(container, playerInventory, displayName);
+    public PortableCraftingScreen(PortableCraftingMenu menu, Inventory playerInventory, Component displayName) {
+        super(menu, new CraftingRecipeBookComponent(menu), playerInventory, displayName);
+    }
+
+    @Override
+    protected ScreenPosition getRecipeBookButtonPosition() {
+        return new ScreenPosition(leftPos + imageWidth - 25, topPos + 5);
     }
 
     @Override

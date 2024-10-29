@@ -1,7 +1,7 @@
 package net.blay09.mods.craftingslots;
 
 import net.blay09.mods.balm.api.Balm;
-import net.blay09.mods.craftingslots.container.ModMenus;
+import net.blay09.mods.craftingslots.menu.ModMenus;
 import net.blay09.mods.craftingslots.item.ModItems;
 import net.blay09.mods.craftingslots.network.ModNetworking;
 

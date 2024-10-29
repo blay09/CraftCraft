@@ -1,8 +1,8 @@
 package net.blay09.mods.craftingslots.addon;
 
 import net.blay09.mods.craftingslots.CraftingSlots;
-import net.blay09.mods.craftingslots.container.InventoryCraftingMenu;
-import net.blay09.mods.craftingslots.container.PortableCraftingMenu;
+import net.blay09.mods.craftingslots.menu.InventoryCraftingMenu;
+import net.blay09.mods.craftingslots.menu.PortableCraftingMenu;
 import net.blay09.mods.craftingtweaks.api.*;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;

@@ -2,8 +2,8 @@ package net.blay09.mods.craftingslots.network;
 
 import net.blay09.mods.balm.api.Balm;
 import net.blay09.mods.craftingslots.CraftingSlots;
-import net.blay09.mods.craftingslots.container.InventoryCraftingMenu;
-import net.blay09.mods.craftingslots.container.PortableCraftingMenu;
+import net.blay09.mods.craftingslots.menu.InventoryCraftingMenu;
+import net.blay09.mods.craftingslots.menu.PortableCraftingMenu;
 import net.blay09.mods.craftingslots.item.ModItems;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

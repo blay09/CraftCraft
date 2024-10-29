@@ -1,4 +1,4 @@
-package net.blay09.mods.craftingslots.container;
+package net.blay09.mods.craftingslots.menu;
 
 import net.blay09.mods.balm.api.DeferredObject;
 import net.blay09.mods.balm.api.menu.BalmMenuFactory;

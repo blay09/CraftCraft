@@ -1,7 +1,7 @@
 package net.blay09.mods.craftingslots.item;
 
 import net.blay09.mods.balm.api.Balm;
-import net.blay09.mods.craftingslots.container.PortableCraftingMenu;
+import net.blay09.mods.craftingslots.menu.PortableCraftingMenu;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.MenuProvider;

@@ -1,6 +1,6 @@
 package net.blay09.mods.craftingslots.item;
 
-import net.blay09.mods.craftingslots.container.InventoryCraftingMenu;
+import net.blay09.mods.craftingslots.menu.InventoryCraftingMenu;
 import net.minecraft.world.MenuProvider;
 
 public class InventoryCraftingItem extends PortableCraftingItem {

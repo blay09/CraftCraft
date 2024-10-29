@@ -1,4 +1,4 @@
-package net.blay09.mods.craftingslots.container;
+package net.blay09.mods.craftingslots.menu;
 
 import net.blay09.mods.balm.api.menu.BalmMenuProvider;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -9,10 +9,18 @@ import net.minecraft.util.Unit;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.StackedItemContents;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.ItemStack;
 
+import java.util.List;
+
 public class PortableCraftingMenu extends CustomCraftingMenu {
+
+    private static final int RESULT_SLOT = 0;
+    private static final int CRAFT_SLOT_START = 1;
+    private static final int CRAFT_SLOT_COUNT = 9;
+    private static final int CRAFT_SLOT_END = CRAFT_SLOT_START + CRAFT_SLOT_COUNT;
 
     public static final MenuProvider provider = new BalmMenuProvider<Unit>() {
         @Override
@@ -36,16 +44,16 @@ public class PortableCraftingMenu extends CustomCraftingMenu {
         }
     };
 
-    private final CraftingContainer craftMatrix = new TransientCraftingContainer(this, 3, 3);
-    private final ResultContainer craftResult = new ResultContainer();
+    private final CraftingContainer craftingContainer = new TransientCraftingContainer(this, 3, 3);
+    private final ResultContainer resultContainer = new ResultContainer();
 
     public PortableCraftingMenu(int windowId, Inventory playerInventory) {
         super(ModMenus.portableCrafting.get(), windowId, playerInventory);
-        addSlot(new ResultSlot(playerInventory.player, craftMatrix, craftResult, 0, 124, 35));
+        addSlot(new ResultSlot(playerInventory.player, craftingContainer, resultContainer, RESULT_SLOT, 124, 35));
 
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
-                addSlot(new Slot(craftMatrix, j + i * 3, 30 + j * 18, 17 + i * 18));
+                addSlot(new Slot(craftingContainer, j + i * 3, 30 + j * 18, 17 + i * 18));
             }
         }
 
@@ -57,13 +65,13 @@ public class PortableCraftingMenu extends CustomCraftingMenu {
         for (int i = 0; i < 9; i++) {
             addSlot(new Slot(playerInventory, i, 8 + i * 18, 142));
         }
-        slotsChanged(craftMatrix);
+        slotsChanged(craftingContainer);
     }
 
     @Override
     public void removed(Player player) {
         super.removed(player);
-        clearContainer(player, craftMatrix);
+        clearContainer(player, craftingContainer);
     }
 
     @Override
@@ -72,22 +80,22 @@ public class PortableCraftingMenu extends CustomCraftingMenu {
     }
 
     @Override
-    public ItemStack quickMoveStack(Player player, int slotIndex) {
+    public ItemStack quickMoveStack(Player player, int index) {
         ItemStack itemStack = ItemStack.EMPTY;
-        Slot slot = this.slots.get(slotIndex);
+        Slot slot = this.slots.get(index);
         if (slot != null && slot.hasItem()) {
             ItemStack slotStack = slot.getItem();
             itemStack = slotStack.copy();
-            if (slotIndex == 0) {
+            if (index == 0) {
                 slotStack.getItem().onCraftedBy(slotStack, player.level(), player);
                 if (!this.moveItemStackTo(slotStack, 10, 46, true)) {
                     return ItemStack.EMPTY;
                 }
 
                 slot.onQuickCraft(slotStack, itemStack);
-            } else if (slotIndex >= 10 && slotIndex < 46) {
+            } else if (index >= 10 && index < 46) {
                 if (!this.moveItemStackTo(slotStack, 1, 10, false)) {
-                    if (slotIndex < 37) {
+                    if (index < 37) {
                         if (!this.moveItemStackTo(slotStack, 37, 46, false)) {
                             return ItemStack.EMPTY;
                         }
@@ -110,7 +118,7 @@ public class PortableCraftingMenu extends CustomCraftingMenu {
             }
 
             slot.onTake(player, slotStack);
-            if (slotIndex == 0) {
+            if (index == 0) {
                 player.drop(slotStack, false);
             }
         }
@@ -120,17 +128,32 @@ public class PortableCraftingMenu extends CustomCraftingMenu {
 
     @Override
     public boolean canTakeItemForPickAll(ItemStack itemStack, Slot slot) {
-        return slot.container != craftResult && super.canTakeItemForPickAll(itemStack, slot);
+        return slot.container != resultContainer && super.canTakeItemForPickAll(itemStack, slot);
     }
 
     @Override
-    public CraftingContainer getCraftMatrix() {
-        return craftMatrix;
+    public Slot getResultSlot() {
+        //noinspection SequencedCollectionMethodCanBeUsed
+        return slots.get(RESULT_SLOT);
     }
 
     @Override
-    protected ResultContainer getCraftResult() {
-        return craftResult;
+    public List<Slot> getInputGridSlots() {
+        return slots.subList(CRAFT_SLOT_START, CRAFT_SLOT_END);
     }
 
+    @Override
+    public CraftingContainer getCraftingContainer() {
+        return craftingContainer;
+    }
+
+    @Override
+    protected ResultContainer getResultContainer() {
+        return resultContainer;
+    }
+
+    @Override
+    public void fillCraftSlotsStackedContents(StackedItemContents stackedItemContents) {
+        craftingContainer.fillStackedContents(stackedItemContents);
+    }
 }
