@@ -5,9 +5,9 @@ import mezz.jei.api.JeiPlugin;
 import mezz.jei.api.constants.RecipeTypes;
 import mezz.jei.api.registration.IRecipeTransferRegistration;
 import net.blay09.mods.craftingslots.CraftingSlots;
-import net.blay09.mods.craftingslots.container.InventoryCraftingMenu;
-import net.blay09.mods.craftingslots.container.ModMenus;
-import net.blay09.mods.craftingslots.container.PortableCraftingMenu;
+import net.blay09.mods.craftingslots.menu.InventoryCraftingMenu;
+import net.blay09.mods.craftingslots.menu.ModMenus;
+import net.blay09.mods.craftingslots.menu.PortableCraftingMenu;
 import net.minecraft.resources.ResourceLocation;
 
 @JeiPlugin
