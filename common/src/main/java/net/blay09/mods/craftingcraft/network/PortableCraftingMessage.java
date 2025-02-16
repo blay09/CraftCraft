@@ -9,16 +9,14 @@ import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
 
-public class PortableCraftingMessage {
+import java.util.function.Predicate;
 
-    /**
-     * literally just to shut up IntelliJ about this being a utility class
-     */
-    private boolean dummy;
+public class PortableCraftingMessage {
 
     public static void encode(PortableCraftingMessage message, FriendlyByteBuf buf) {
     }
 
+    @SuppressWarnings("InstantiationOfUtilityClass")
     public static PortableCraftingMessage decode(FriendlyByteBuf buf) {
         return new PortableCraftingMessage();
     }
@@ -37,9 +35,15 @@ public class PortableCraftingMessage {
     }
 
     private static ItemStack findPortableCrafting(Inventory inventory) {
+        final Predicate<ItemStack> predicate = itemStack -> itemStack.getItem() == ModItems.inventoryCraftingTable || itemStack.getItem() == ModItems.portableCraftingTable;
+        final var charm = Balm.getModSupport().trinkets().findEquipped(inventory.player, predicate);
+        if (!charm.isEmpty()) {
+            return charm;
+        }
+
         for (int i = 0; i < inventory.getContainerSize(); i++) {
-            ItemStack itemStack = inventory.getItem(i);
-            if (!itemStack.isEmpty() && (itemStack.getItem() == ModItems.inventoryCraftingTable || itemStack.getItem() == ModItems.portableCraftingTable)) {
+            final var itemStack = inventory.getItem(i);
+            if (predicate.test(itemStack)) {
                 return itemStack;
             }
         }

@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+    "craftingcraft:portable_crafting",
+    "craftingcraft:inventory_crafting"
+  ]
+}
