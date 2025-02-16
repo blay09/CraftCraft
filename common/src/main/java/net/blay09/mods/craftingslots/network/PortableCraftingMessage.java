@@ -11,6 +11,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.ItemStack;
+import java.util.function.Predicate;
 
 public class PortableCraftingMessage implements CustomPacketPayload {
 
@@ -37,9 +38,15 @@ public class PortableCraftingMessage implements CustomPacketPayload {
     }
 
     private static ItemStack findPortableCrafting(Inventory inventory) {
+        final Predicate<ItemStack> predicate = itemStack -> itemStack.getItem() == ModItems.inventoryCraftingTable || itemStack.getItem() == ModItems.portableCraftingTable;
+        final var charm = Balm.getModSupport().trinkets().findEquipped(inventory.player, predicate);
+        if (!charm.isEmpty()) {
+            return charm;
+        }
+
         for (int i = 0; i < inventory.getContainerSize(); i++) {
-            ItemStack itemStack = inventory.getItem(i);
-            if (!itemStack.isEmpty() && (itemStack.getItem() == ModItems.inventoryCraftingTable || itemStack.getItem() == ModItems.portableCraftingTable)) {
+            final var itemStack = inventory.getItem(i);
+            if (predicate.test(itemStack)) {
                 return itemStack;
             }
         }
