@@ -24,6 +24,9 @@
     ],
     "client": [
       "net.blay09.mods.craftingcraft.client.FabricCraftingCraftClient"
+    ],
+    "jei_mod_plugin": [
+      "net.blay09.mods.craftingcraft.addon.JEIAddon"
     ]
   },
   "mixins": [
